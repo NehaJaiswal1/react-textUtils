@@ -31,7 +31,14 @@ function App() {
       setMode('dark');
       document.body.style.backgroundColor = '#042743';
       showAlert("Dark mode has been enabled", "success");
-      document.title = 'TextUtils-Dark Mode';
+    }
+    else{
+      setMode('light');
+      document.body.style.backgroundColor = 'white';
+      showAlert("Light mode has been enabled", "success");
+    }
+  }
+
       // below code is not a good user experience , it can be used for just grabbing attention of user to download application or software in browser. So, it must be very disturbing for user.
       
       // setInterval(()=>{
@@ -40,25 +47,17 @@ function App() {
       // setInterval(()=>{
       //   document.title = 'Install TextUtils now';
       // }, 1500);
-    }
-    else{
-      setMode('light');
-      document.body.style.backgroundColor = 'white';
-      showAlert("Light mode has been enabled", "success");
-      document.title = 'TextUtils-Light Mode';
-    }
-  }
+
   return (
     <>
     <Router>
        <Navbar title="TextUtils"  mode={mode} toggleMode ={toggleMode}/>
        <div className='container my-3'>
         <Alert alert={alert}/>
-        <Routes>   
-          <Route exact path="/about" element={<About />} />
-          <Route exact path="/" element={<TextForm heading="Enter the text to analyze below" onShowAlert={showAlert}/>} />
-        </Routes>
-         
+        <Routes>
+        <Route path="/about" element={<About mode={mode} />} />
+        <Route path="/" element={<TextForm showAlert={showAlert} heading="Try TextUtils - word counter, character counter, remove extra spaces" mode={mode} />} />
+      </Routes>
         </div>
         </Router>
     
